@@ -30,16 +30,50 @@ app.get('/', function(req, res){
                     id: record._fields[0].identity.low,
                     nombre: record._fields[0].properties.nombre
                 });
-                console.log(record._fields[0].properties);
             });
-            res.render('index', {
-                movies: movieArr
-            });
+
+            session
+                .run('MATCH(n:equipo) RETURN n LIMIT 25')
+                .then(function(result2){
+                    var actorArr = [];
+                    result2.records.forEach(function(record){
+                        actorArr.push({
+                            id: record._fields[0].identity.low,
+                            nombre: record._fields[0].properties.nombre
+                        });
+                    });
+                    res.render('index', {
+                        movies: movieArr,
+                        actors: actorArr
+                    });
+                })
+                .catch(function(err){
+                    console.log(err);
+                });
         })
         .catch(function(err){
             console.log({err});
         });
 });
+
+
+
+
+app.post(function(req, res){
+    var nombre = req.body.nombre;
+
+    session
+        .run('CREATE(n:equipo {title:{nombreParam}}) RETURN n.nombre', {nombreParam:nombre})
+        .then(function(result){
+            res.redirect('/');
+            session.close();
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+
+    res.redirect('/');
+})
 
 app.listen(3000);
 console.log('Server on port 3000');

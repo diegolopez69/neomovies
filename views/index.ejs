@@ -1,6 +1,22 @@
-<h1>Movies</h1>
+<form method="post" action="/equipo/add" >
+    <label>Nombre del equipo</label><br>
+    <input type="text" name="title">
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+
+
+<h1>Competiciones</h1>
 <ul>
 <% movies.forEach(function(movie){ %>
     <li><%= movie.nombre %></li>
+<% }) %>
+</ul>
+
+
+<h1>Equipos</h1>
+<ul>
+<% actors.forEach(function(actor){ %>
+    <li><%= actor.nombre %></li>
 <% }) %>
 </ul>
