@@ -28,7 +28,7 @@ app.get('/', function(req, res){
             result.records.forEach(function(record){
                 movieArr.push({
                     id: record._fields[0].identity.low,
-                    name: record._fields[0].properties.name
+                    nombre: record._fields[0].properties.nombre
                 });
                 console.log(record._fields[0].properties);
             });
