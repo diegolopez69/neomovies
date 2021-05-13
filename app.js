@@ -59,14 +59,16 @@ app.get('/', function(req, res){
 
 
 
-app.post(function(req, res){
+var session2 = driver.session();
+
+app.post('/equipo/add',function(req, res){
     var nombre = req.body.nombre;
 
-    session
-        .run('CREATE(n:equipo {title:{nombreParam}}) RETURN n.nombre', {nombreParam:nombre})
+    session2
+        .run('CREATE(n:equipo {nombre:{nombreParam}}) RETURN n.nombre', {nombreParam:nombre})
         .then(function(result){
             res.redirect('/');
-            session.close();
+            session2.close();
         })
         .catch(function(err){
             console.log(err);
