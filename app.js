@@ -58,9 +58,8 @@ app.get('/', function(req, res){
 
 
 
-
+//Para agregar un equipo
 var session2 = driver.session();
-
 app.post('/equipo/add',function(req, res){
     var nombre = req.body.nombre;
 
@@ -77,7 +76,26 @@ app.post('/equipo/add',function(req, res){
     res.redirect('/');
 })
 
-app.listen(3000);
-console.log('Server on port 3000');
+
+//Para agregar una competición
+var session3 = driver.session();
+app.post('/competicion/add',function(req, res){
+    var nombre = req.body.nombre;
+
+    session3
+        .run('CREATE(n:competicion {nombre:{nombreParam}}) RETURN n.nombre', {nombreParam:nombre})
+        .then(function(result){
+            res.redirect('/');
+            session3.close();
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+
+    res.redirect('/');
+})
+
+app.listen(3300);
+console.log('Server on port 3300');
 
 module.exports = app;

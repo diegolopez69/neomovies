@@ -1,12 +1,24 @@
-<form method="post" action="/equipo/add" >
-    <label>Nombre del equipo</label><br>
+<h1>Agregar una competición</h1>
+<form method="post" action="/competicion/add" >
+    <label>Agregar una competición</label><br>
     <input type="text" name="nombre">
     <br><br>
     <input type="submit" value="Submit">
+    <br><br>
 </form>
 
 
-<h1>Competiciones</h1>
+<h1>Agregar un equipo</h1>
+<form method="post" action="/equipo/add" >
+    <label>Agregar equipo</label><br>
+    <input type="text" name="nombre">
+    <br><br>
+    <input type="submit" value="Submit">
+    <br><br>
+</form>
+
+
+<h3>Competiciones</h3>
 <ul>
 <% movies.forEach(function(movie){ %>
     <li><%= movie.nombre %></li>
@@ -14,7 +26,7 @@
 </ul>
 
 
-<h1>Equipos</h1>
+<h3>Equipos</h3>
 <ul>
 <% actors.forEach(function(actor){ %>
     <li><%= actor.nombre %></li>
