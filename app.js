@@ -98,13 +98,20 @@ app.post('/competicion/add',function(req, res){
 //Para relacionar los nodos
 var session4 = driver.session();
 app.post('/competicion/equipo/add',function(req, res){
-    var nombreCompeticion = req.body.nombre;
-    var nombreEquipo = req.body.nombre;
+    var nombreCompeticion = req.body.nombre[0];    //
+    var nombreEquipo = req.body.nombre[1];
 
+    console.log({nombreCompeticion});
+    console.log({nombreEquipo});
     session4
         .run('MATCH(a:equipo {nombre:{nombreEquipoParam}}), (b:competicion{nombre:{nombreCompeticionParam}}) MERGE (a)-[r:COMPITE]-(b) RETURN a,b', {nombreEquipoParam: nombreEquipo, nombreCompeticionParam :nombreCompeticion})
+       
+        // ` match (r:restaurant)-[]->(i:item) where r.id = $id
+        // with r,i
+        // match (i)-[]->(it:itemType)
+        // return r,i,it
+        // `
         .then(function(result){
-            res.redirect('/');
             session4.close();
         })
         .catch(function(err){
