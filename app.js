@@ -61,10 +61,10 @@ app.get('/', function(req, res){
 //Para agregar un equipo
 var session2 = driver.session();
 app.post('/equipo/add',function(req, res){
-    var nombre = req.body.nombre;
+    var nombreEquipo = req.body.nombre;
 
     session2
-        .run('CREATE(n:equipo {nombre:{nombreParam}}) RETURN n.nombre', {nombreParam:nombre})
+        .run('CREATE(n:equipo {nombre:{nombreEquipoParam}}) RETURN n.nombre', {nombreEquipoParam:nombreEquipo})
         .then(function(result){
             res.redirect('/');
             session2.close();
@@ -80,10 +80,10 @@ app.post('/equipo/add',function(req, res){
 //Para agregar una competición
 var session3 = driver.session();
 app.post('/competicion/add',function(req, res){
-    var nombre = req.body.nombre;
+    var nombreCompeticion = req.body.nombre;
 
     session3
-        .run('CREATE(n:competicion {nombre:{nombreParam}}) RETURN n.nombre', {nombreParam:nombre})
+        .run('CREATE(n:competicion {nombre:{nombreCompeticionParam}}) RETURN n.nombre', {nombreCompeticionParam:nombreCompeticion})
         .then(function(result){
             res.redirect('/');
             session3.close();
@@ -94,6 +94,26 @@ app.post('/competicion/add',function(req, res){
 
     res.redirect('/');
 })
+
+//Para relacionar los nodos
+var session4 = driver.session();
+app.post('/competicion/equipo/add',function(req, res){
+    var nombreCompeticion = req.body.nombre;
+    var nombreEquipo = req.body.nombre;
+
+    session4
+        .run('MATCH(a:equipo {nombre:{nombreEquipoParam}}), (b:competicion{nombre:{nombreCompeticionParam}}) MERGE (a)-[r:COMPITE]-(b) RETURN a,b', {nombreEquipoParam: nombreEquipo, nombreCompeticionParam :nombreCompeticion})
+        .then(function(result){
+            res.redirect('/');
+            session4.close();
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+
+    res.redirect('/');
+})
+
 
 app.listen(3300);
 console.log('Server on port 3300');

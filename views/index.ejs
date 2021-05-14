@@ -18,6 +18,18 @@
 </form>
 
 
+<h1>Relacionar un equipo a una competición</h1>
+<form method="post" action="/competicion/equipo/add" >
+    <label>Agregar equipo</label><br>
+    <input type="text" name="nombre">
+    <br><br>
+    <label>Agregar competición</label><br>
+    <input type="text" name="nombre">
+    <br><br>
+    <input type="submit" value="Submit">
+    <br><br>
+</form>
+
 <h3>Competiciones</h3>
 <ul>
 <% movies.forEach(function(movie){ %>
