@@ -121,6 +121,24 @@ app.post('/competicion/equipo/add',function(req, res){
     res.redirect('/');
 })
 
+//Para borrar todos los nodos
+var session5 = driver.session();
+app.post('/borrar',function(req, res){
+    var nombreCompeticion = req.body.nombre;
+
+    session5
+        .run('MATCH (n) DETACH DELETE n')
+        .then(function(result){
+            res.redirect('/');
+            session5.close();
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+
+    
+})
+
 
 app.listen(3300);
 console.log('Server on port 3300');
