@@ -49,8 +49,30 @@
 </ul>
 
 
+<h1>Eliminar un equipo</h1>
+<form method="delete" action="/competicion/borrar/" >
+    <label>Eliminar equipo</label><br>
+    <input type="text" name="nombre">
+    <br><br>
+    <input type="submit" value="Submit">
+    <br><br>
+</form>
+
+
+
+<h1>Eliminar una competición</h1>
+<form method="delete" action="/competicion/borrar" >
+    <label>Eliminar una competición</label><br>
+    <input type="text" name="nombre">
+    <br><br>
+    <input type="submit" value="Submit">
+    <br><br>
+</form>
+
+
+
 <h1>Borrar toda la base de datos</h1>
-<form method="post" action="/borrar" >
+<form method="delete" action="/borrar" >
     <input type="submit" value="Submit">
     <br><br>
 </form>

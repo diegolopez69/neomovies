@@ -121,16 +121,54 @@ app.post('/competicion/equipo/add',function(req, res){
     res.redirect('/');
 })
 
-//Para borrar todos los nodos
+//Para eliminar un equipo
 var session5 = driver.session();
-app.post('/borrar',function(req, res){
-    var nombreCompeticion = req.body.nombre;
+app.delete('/competicion/borrar',function(req, res){
+    var nombreEquipo = req.body.nombre;
 
     session5
-        .run('MATCH (n) DETACH DELETE n')
+        .run('MATCH(n:equipo {nombre:{nombreEquipoParam}}) DETACH DELETE n.nombre', {nombreEquipoParam:nombreEquipo})
         .then(function(result){
             res.redirect('/');
             session5.close();
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+
+    res.redirect('/');
+})
+
+
+//Para eliminar una competición
+var session6 = driver.session();
+app.post('/competicion/borrar',function(req, res){
+    var nombreCompeticion = req.body.nombre;
+
+    session6
+        .run('MATCH (n:competicion {nombre:{nombreCompeticionParam}}) DELETE n.nombre', {nombreCompeticionParam:nombreCompeticion})
+        .then(function(result){
+            res.redirect('/');
+            session6.close();
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+
+    res.redirect('/');
+})
+
+
+//Para eliminar todos los nodos
+var session7 = driver.session();
+app.post('/borrar',function(req, res){
+    var nombreCompeticion = req.body.nombre;
+
+    session7
+        .run('MATCH (n) DETACH DELETE n')
+        .then(function(result){
+            res.redirect('/');
+            session7.close();
         })
         .catch(function(err){
             console.log(err);
