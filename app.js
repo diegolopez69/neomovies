@@ -98,8 +98,8 @@ app.post('/competicion/add',function(req, res){
 //Para relacionar los nodos
 var session4 = driver.session();
 app.post('/competicion/equipo/add',function(req, res){
-    var nombreCompeticion = req.body.nombre[0];    //
-    var nombreEquipo = req.body.nombre[1];
+    var nombreCompeticion = req.body.nombreCompeticion;    
+    var nombreEquipo = req.body.nombreEquipo;
 
     console.log({nombreCompeticion});
     console.log({nombreEquipo});
@@ -112,7 +112,7 @@ app.post('/competicion/equipo/add',function(req, res){
         // return r,i,it
         // `
         .then(function(result){
-            session4.close();
+            //session4.close();
         })
         .catch(function(err){
             console.log(err);
