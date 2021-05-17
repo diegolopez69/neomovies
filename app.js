@@ -123,7 +123,7 @@ app.post('/competicion/equipo/add',function(req, res){
 
 //Para eliminar un equipo
 var session5 = driver.session();
-app.delete('/competicion/borrar',function(req, res){
+app.post('/competicion/borrar',function(req, res){
     var nombreEquipo = req.body.nombre;
 
     session5
@@ -142,7 +142,7 @@ app.delete('/competicion/borrar',function(req, res){
 
 //Para eliminar una competición
 var session6 = driver.session();
-app.post('/competicion/borrar',function(req, res){
+app.post('/competicion/delete',function(req, res){
     var nombreCompeticion = req.body.nombre;
 
     session6
@@ -176,6 +176,7 @@ app.post('/borrar',function(req, res){
 
     
 })
+
 
 
 app.listen(3300);
